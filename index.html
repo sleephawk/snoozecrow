@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Three.js ASCII Effect with SVG Border</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <svg
+      id="canvas"
+      width="500"
+      height="500"
+      viewBox="0 0 500 500"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <path
+          id="circle-text"
+          d="M 250,15 A 236,236 0 1,1 249.99,15 Z"
+          fill="none"
+          stroke="white"
+        />
+      </defs>
+      <text>
+        <textPath xlink:href="#circle-text" startOffset="0%">
+          COMING SOON | COMING SOON | COMING SOON | COMING SOON | COMING SOON |
+          COMING SOON | COMING SOON | COMING SOON | COMING SOON | COMING SOON |
+          COMING SOON | COMING SOON | COMING SOON | COMING SOON |COMING SOON |
+          COMING SOON | COMING SOON | COMING SOON |
+        </textPath>
+      </text>
+    </svg>
+    <div id="container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module" src="crow.js"></script>
+  </body>
+</html>

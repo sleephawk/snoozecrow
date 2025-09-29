@@ -1,0 +1,75 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  background: black;
+}
+#wrapper {
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#circle-text {
+  border: solid 1px green;
+  position: relative;
+  right: 30px;
+}
+
+#canvas {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  align-self: center;
+  justify-self: center;
+  top: 0;
+  left: 0;
+  animation: rotate 100s linear infinite;
+}
+
+#container {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 460px;
+  height: 460px;
+  position: absolute;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 50%;
+  /* border: 10px solid white; */
+}
+
+#cont-background {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  width: 520px;
+  height: 520px;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+}
+
+text {
+  fill: white;
+  font-family: "Futura", sans-serif;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
