@@ -21,8 +21,7 @@ function init() {
   camera.position.set(2, 2, 2);
 
   // ----- SCENE -----
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene = new THREE.Scene({alpha: true, background: null});
 
   // ----- LIGHTS -----
   const directional = new THREE.DirectionalLight(0xffffff, 1);
@@ -34,7 +33,7 @@ function init() {
 
   // ----- RENDERER -----
   const container = document.getElementById("container");
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   container.appendChild(renderer.domElement);
 
   // ----- CONTROLS -----
