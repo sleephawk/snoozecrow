@@ -1,4 +1,12 @@
-body {
+#wrapper {
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#feature-container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -6,13 +14,6 @@ body {
   overflow: hidden;
   background: black;
   padding: 1rem;
-}
-#wrapper {
-  border: 2px solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
 }
 
 #circle-text {
