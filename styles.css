@@ -22,6 +22,10 @@
   right: 30px;
 }
 
+textPath {
+  font-size: 15.9px;
+}
+
 #canvas {
   position: relative;
   top: 0;
