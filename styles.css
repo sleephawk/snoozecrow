@@ -8,7 +8,7 @@ h1 {
   font-family: "mundial", sans-serif;
   font-weight: 400;
   font-style: normal;
-  position: absolute;
+  position: fixed;
   line-height: 1.5;
 }
 
@@ -55,7 +55,7 @@ textPath {
 #menu-list {
   color: white;
   font-family: "mundial", sans-serif;
-  position: absolute;
+  position: fixed;
   right: 5%;
   top: 60%;
   background-color: rgba(0, 0, 0, 0.705);
