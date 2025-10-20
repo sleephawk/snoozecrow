@@ -8,30 +8,6 @@ const canvas = document.getElementById("canvas");
 
 const panels = document.getElementById("panels");
 
-const setPanel = (el, url, pos) => {
-  el.addEventListener("click", () => {
-    if (document.getElementById("feature")) {
-      panels.removeChild(document.getElementById("feature"));
-    }
-    const img = document.createElement("img");
-    img.setAttribute("id", "feature");
-    img.setAttribute("src", url);
-    img.setAttribute("draggable", "false");
-    img.style.bottom = pos;
-    img.style.width = "100vw";
-    img.style.position = "fixed";
-    crow.style.opacity = 0;
-    canvas.style.opacity = 0;
-    panels.appendChild(img);
-    console.log("we got there");
-  });
-};
-
-setPanel(packagesBottom, "assets/images/panels/3D/lighthouse.png", 0);
-setPanel(aboutTop, "assets/images/panels/3D/cave-render.png", "inherit");
-setPanel(projectsLeft, "assets/images/panels/3D/cave-left-render.png", 0);
-setPanel(contactRight, "assets/images/panels/3D/mountain-render.png", 0);
-
 const throttle = (mainFunction, delay) => {
   let timerFlag = null; // Variable to keep track of the timer
 
@@ -72,6 +48,8 @@ const mouseOver = ({clientY, clientX, target}) => {
 
   body.style.setProperty( '--magnet-x', `${ (x * -100)}px` );
   body.style.setProperty( '--magnet-y', `${ (y * -100) }px` );
+  body.style.setProperty( '--magnet-x-half', `${ (x * 20)}px` );
+  body.style.setProperty( '--magnet-y-half', `${ (y * 20) }px` );
   //document.body.style.setProperty( '--tilt-x', `${ tiltX }deg` );
   //document.body.style.setProperty( '--tilt-y', `${ tiltY }deg` );
   //document.body.style.setProperty( '--angle', `${ angle }px` );
@@ -79,6 +57,72 @@ const mouseOver = ({clientY, clientX, target}) => {
 
 const throttledMouseOver = throttle(mouseOver, 12);
 
+
+
+const setPanel = (el, url, settings = {}) => {
+
+  let defaultSettings = {
+    bottom: 'auto',
+    left: 'auto',
+    top: 'auto',
+    right: 'auto',
+    position: 'fixed',
+    width: '100vw'
+  }
+
+  el.addEventListener("click", () => {
+
+    if(document.getElementById("feature")) {
+      panels.removeChild(document.getElementById("feature"));
+    }
+
+
+    if(!panels.dataset.perspective) {
+      window.addEventListener('mousemove', throttledMouseOver);
+      panels.dataset.perspective = 'active';
+    }
+
+    const {top, left, right, bottom, width, position} = Object.assign(defaultSettings, settings);
+
+    const img = document.createElement("img");
+    img.addEventListener('load', () => {
+      img.classList.add('active');
+    });
+    img.setAttribute("id", "feature");
+    img.setAttribute("src", url);
+    img.setAttribute("draggable", "false");
+    img.style.bottom = bottom;
+    img.style.right = right;
+    img.style.top = top;
+    img.style.left = left;
+    img.style.width = width;
+    img.style.position = position;
+    crow.style.opacity = 0;
+    canvas.style.opacity = 0;
+    panels.appendChild(img);
+    console.log("we got there");
+  });
+};
+
+const unsetPanel = () => {
+  panels.innerHTML = '';
+  window.removeEventListener('mousemove', throttledMouseOver);
+  delete panels.dataset.perspective;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('mousemove', throttledMouseOver);
+  document.documentElement.classList.add('braindbird-loaded')
+  setPanel(packagesBottom, "assets/images/panels/3D/lighthouse.png", {
+    bottom: '-100px',
+    width: '110vw'
+  });
+  setPanel(aboutTop, "assets/images/panels/3D/cave-render.png", {
+    bottom: 0
+  });
+  setPanel(projectsLeft, "assets/images/panels/3D/cave-left-render.png", );
+  setPanel(contactRight, "assets/images/panels/3D/mountain-render.png", {
+    bottom: '-6vw',
+    right: '-3vw',
+    width: '110vw'
+  });
 });
