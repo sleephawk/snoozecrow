@@ -21,7 +21,8 @@ function init() {
   camera.position.set(2, 2, 2);
 
   // ----- SCENE -----
-  scene = new THREE.Scene({alpha: true, background: null});
+  scene = new THREE.Scene();
+  scene.background = null;
 
   // ----- LIGHTS -----
   const directional = new THREE.DirectionalLight(0xffffff, 1);
