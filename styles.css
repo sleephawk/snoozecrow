@@ -11,7 +11,10 @@ h1 {
   position: fixed;
   line-height: 1.5;
 }
-
+#feature {
+  transition: transform 10ms linear;
+  transform: translate(var(--magnet-x), var(--magnet-y));
+}
 #feature-container {
   height: 100vh;
   display: flex;
