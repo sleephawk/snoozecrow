@@ -29,6 +29,7 @@ const mouseOver = ({clientY, clientX, target}) => {
   let x, y;
 
   const { offsetWidth, offsetHeight} = target;
+
   const { left, top, width, height } = target.getBoundingClientRect();
 
   const reverse = -1;
@@ -70,14 +71,16 @@ const setPanel = (el, url, settings = {}) => {
     width: '100vw'
   }
 
-  el.addEventListener("click", () => {
+  el.addEventListener("click", (event) => {
 
     if(document.getElementById("feature")) {
       panels.removeChild(document.getElementById("feature"));
     }
 
+    throttledMouseOver({clientY: event.clientY, clientX: event.clientX, target: panels});
 
     if(!panels.dataset.perspective) {
+
       window.addEventListener('mousemove', throttledMouseOver);
       panels.dataset.perspective = 'active';
     }
