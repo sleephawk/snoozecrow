@@ -1,4 +1,18 @@
-body {
+h1 {
+  background-color: rgba(0, 0, 0, 0.377);
+  font-size: 2rem;
+  font-style: normal;
+  color: white;
+  padding: 10px 0 10px 20px;
+  z-index: 101;
+  font-family: "mundial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  position: fixed;
+  line-height: 1.5;
+}
+
+#feature-container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -33,9 +47,30 @@ textPath {
   pointer-events: none;
   align-self: center;
   justify-self: center;
-  max-width: 95vw;
-  max-height: 95vw;
+  max-width: 80vw;
+  max-height: 80vw;
   animation: rotate 100s linear infinite;
+}
+
+#menu-list {
+  color: white;
+  font-family: "mundial", sans-serif;
+  position: fixed;
+  right: 5%;
+  top: 60%;
+  background-color: rgba(0, 0, 0, 0.705);
+
+  line-height: 3;
+  text-align: end;
+}
+#menu-list li {
+  transition: all 0.1s ease-in;
+}
+
+#menu-list li:hover {
+  cursor: pointer;
+  scale: 1.2;
+  color: antiquewhite;
 }
 
 #container {
