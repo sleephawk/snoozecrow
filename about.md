@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-### Matt
-
-Matt: “Snoozecrow Studio is an experienced-focused multimedia creative studio that combines my accumulated creative industry experience into digital solutions that feel like miniature worlds. Trained in music, design, PR and software development, I look for the narrative in your brand and enhances it with the assets you need to make it real, without any reliance on AI slop. On top of that, I can provide reliable infrastructure for your project, be it clean polygons in 3D art, clean and accessible code for frontend in JS, TS or React, clean stems from your soundtrack or clean SVGs for your logo. Snoozecrow Studio has the tools you need to make your vision flourish, by providing all the magic you need in the background to project it proudly to your audience.”
-=======
 ### Snoozecrow Studio
 
 Matt: “Snoozecrow Studio is an experienced-focused multimedia creative studio that combines my accumulated creative industry experience into digital solutions that feel like miniature worlds. Trained in music, design, PR and software development, I look for the narrative in your brand and enhances it with the assets you need to make it real, without any reliance on AI slop. On top of that, I provide reliable infrastructure for your project, be it clean polygons in 3D art, clean and accessible code for frontend in JS, TS or React, clean stems from your soundtrack or clean SVGs for your logo. Snoozecrow Studio has the tools you need to make your vision flourish, by providing all the magic you need in the background to project it proudly to your audience.”
@@ -34,4 +29,3 @@ We’re equipped for that. Bigger experiences require lots of planning and a rob
 ##### Do you use AI graphics and media?
 
 Absolutely not. With a decade of combined experience in software development, music, graphic design, and dedication to artistic development, we have the skills to give you a real, breathing website with nuance and heart. Just like an online builder, AI is an echo of every other website, useful for quick tasks, but charmless in the long term. We’re offering something spontaneous that reflects you and your team, so you stand out for who you are.
->>>>>>> main
