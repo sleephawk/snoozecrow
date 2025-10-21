@@ -1,25 +1,47 @@
-h1 {
-  background-color: rgba(0, 0, 0, 0.377);
-  font-size: 2rem;
-  font-style: normal;
-  color: white;
-  padding: 10px 0 10px 20px;
-  z-index: 101;
-  font-family: "mundial", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  position: fixed;
-  line-height: 1.5;
+html {
+  --default-font-family: 'questrial', sans-serif;
 }
 
+html * {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 4vw;
+  font-style: normal;
+  color: white;
+  right: 0;
+  padding: 5vw 6vw;
+  line-height: 1;
+  text-align: right;
+  z-index: 101;
+  font-family: var(--default-font-family);
+  font-weight: 400;
+  position: fixed;
+  margin: 0;
+  transform: translate(var(--magnet-x-half), var(--magnet-y-half))
+}
+
+#feature.active {
+  opacity: 1;
+  transition: opacity 400ms linear 300ms;
+  transform: translate(var(--magnet-x), var(--magnet-y));
+}
+
+#feature {
+  transition: transform 10ms linear, opacity 50ms linear;
+  scale: 1.05;
+  opacity: 0;
+}
 #feature-container {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-end;
   margin: 0;
   overflow: hidden;
   background: black;
-  padding: 1rem;
+  padding: 4vw 7vw;
 }
 #wrapper {
   border: 2px solid red;
@@ -41,11 +63,9 @@ textPath {
 
 #canvas {
   position: relative;
-  top: 0;
-  left: 0;
   z-index: 100;
   pointer-events: none;
-  align-self: center;
+  align-self: end;
   justify-self: center;
   max-width: 80vw;
   max-height: 80vw;
@@ -54,7 +74,7 @@ textPath {
 
 #menu-list {
   color: white;
-  font-family: "mundial", sans-serif;
+  font-family: var(--default-font-family);
   position: fixed;
   right: 5%;
   top: 60%;
@@ -75,7 +95,7 @@ textPath {
 
 #container {
   display: flex;
-  align-self: center;
+  align-self: end;
   justify-self: center;
   width: 460px;
   height: 460px;
@@ -112,5 +132,40 @@ text {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+h1 em {
+  font-style: normal;
+  text-align: right;
+  display: block;
+  font-weight: 200;
+}
+
+
+.by {
+  transition-duration: 0.5s;
+  display: inline-block;
+  text-transform: lowercase;
+  transform: none;
+  opacity: 1;
+}
+
+.madila {
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
+  transform: none;
+}
+
+html:not(.braindbird-loaded) {
+  .by {
+    opacity: 0;
+    transform: scale(0.5) rotate(-45deg);
+  }
+  .madila {
+    opacity: 0;
+    transform: translateX(4rem);
   }
 }
