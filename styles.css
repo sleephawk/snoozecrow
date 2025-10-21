@@ -19,13 +19,18 @@ h1 {
   font-weight: 400;
   position: fixed;
   margin: 0;
-  transform: translate(var(--magnet-x-half), var(--magnet-y-half))
+  transform: translate(var(--magnet-x-half), var(--magnet-y-half));
 }
 
 #feature.active {
   opacity: 1;
   transition: opacity 400ms linear 300ms;
   transform: translate(var(--magnet-x), var(--magnet-y));
+  /* This enables slight rotation in 3D
+  transform: translate(var(--magnet-x), var(--magnet-y)) rotate3d(0, 1, 0, var(--tilt-z));
+   */
+  perspective-origin: center;
+  perspective: 1000px;
 }
 
 #feature {
@@ -73,24 +78,53 @@ textPath {
 }
 
 #menu-list {
+  list-style-position: inside;
   color: white;
   font-family: var(--default-font-family);
   position: fixed;
   right: 5%;
   top: 60%;
-  background-color: rgba(0, 0, 0, 0.705);
-
+  background-color: rgba(0, 0, 0, 0.305);
   line-height: 3;
   text-align: end;
+  padding: 2rem 0 2rem 2rem;
+  border: 1px solid white;
+  border-left: 4px solid white;
+  corner-shape: bevel;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 16px;
 }
-#menu-list li {
+#menu-list li a {
+  color: white;
+  padding: 0 2rem;
+  transition: all 0.1s ease-in;
+  text-decoration: none;
+  display: inline-block;
+  min-width: 20ch;
+}
+
+#menu-list li::marker {
+  content: "+";
+  font-size: 2.2em;
+  display: block;
+  line-height: 1em;
+  color: rgba(255,255,255,0.4);
+}
+
+#menu-list li:where(:hover, :focus, :focus-within) {
   transition: all 0.1s ease-in;
 }
 
-#menu-list li:hover {
+#menu-list li:where(:hover, :focus, :focus-within)::marker {
+  color: rgba(255,255,255,1);
+}
+
+#menu-list li:where(:hover, :focus, :focus-within) a {
+  outline: none;
   cursor: pointer;
   scale: 1.2;
-  color: antiquewhite;
+  transform: translateX(-0.5em);
+  color: #03ffff;
 }
 
 #container {

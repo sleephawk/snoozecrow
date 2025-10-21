@@ -8,6 +8,8 @@ const canvas = document.getElementById("canvas");
 
 const panels = document.getElementById("panels");
 
+let debouncingAnimation = null;
+
 const throttle = (mainFunction, delay) => {
   let timerFlag = null; // Variable to keep track of the timer
 
@@ -22,7 +24,7 @@ const throttle = (mainFunction, delay) => {
   };
 }
 
-const mouseOver = ({clientY, clientX, target}) => {
+const mouseOver = ({type, clientY, clientX, target}) => {
   const { body } = document;
   const { clientWidth, clientHeight } = body;
 
@@ -34,7 +36,7 @@ const mouseOver = ({clientY, clientX, target}) => {
 
   const reverse = -1;
   const settings = {
-    max: 50,
+    max: 40,
   }
 
   x = clientX / clientWidth;
@@ -51,14 +53,13 @@ const mouseOver = ({clientY, clientX, target}) => {
   body.style.setProperty( '--magnet-y', `${ (y * -100) }px` );
   body.style.setProperty( '--magnet-x-half', `${ (x * 20)}px` );
   body.style.setProperty( '--magnet-y-half', `${ (y * 20) }px` );
-  //document.body.style.setProperty( '--tilt-x', `${ tiltX }deg` );
-  //document.body.style.setProperty( '--tilt-y', `${ tiltY }deg` );
-  //document.body.style.setProperty( '--angle', `${ angle }px` );
+  body.style.setProperty( '--tilt-z', `${ (parseFloat(tiltX) + parseFloat(tiltY)) * 0.2 }deg` );
+  //body.style.setProperty( '--tilt-x', `${ tiltX }deg` );
+  //body.style.setProperty( '--tilt-y', `${ tiltY }deg` );
+  body.style.setProperty( '--angle', `${ angle }px` );
 }
 
 const throttledMouseOver = throttle(mouseOver, 12);
-
-
 
 const setPanel = (el, url, settings = {}) => {
 
@@ -77,10 +78,9 @@ const setPanel = (el, url, settings = {}) => {
       panels.removeChild(document.getElementById("feature"));
     }
 
-    throttledMouseOver({clientY: event.clientY, clientX: event.clientX, target: panels});
+    throttledMouseOver({type: 'init', clientY: event.clientY, clientX: event.clientX, target: panels});
 
     if(!panels.dataset.perspective) {
-
       window.addEventListener('mousemove', throttledMouseOver);
       panels.dataset.perspective = 'active';
     }
@@ -109,7 +109,9 @@ const setPanel = (el, url, settings = {}) => {
 
 const unsetPanel = () => {
   panels.innerHTML = '';
+  window.removeEventListener('mouseenter', throttledMouseOver);
   window.removeEventListener('mousemove', throttledMouseOver);
+  window.removeEventListener('mouseleave', throttledMouseOver);
   delete panels.dataset.perspective;
 }
 
