@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         '#709393'
     ]
 
-    console.log(byAnimation);
-
     const animationColours = (init = false) => {
         if(byAnimation || init) {
            let index;
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
            }
 
            intro.style.setProperty('--next-color', currentColor);
-           console.log(colors.length, currentColor, init);
+  
            byAnimation = setInterval(animationColours, 4000);
         }
     }
