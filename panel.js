@@ -170,9 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
         width: '110vw'
     });
     setPanel(aboutTop, "assets/images/panels/3D/cave-render.png", {
-        bottom: 0
+        bottom: 0,
+        left: '-5vw'
     });
-    setPanel(projectsLeft, "assets/images/panels/3D/cave-left-render.png",);
+    setPanel(projectsLeft, "assets/images/panels/3D/cave-left-render.png", {
+        bottom: 0,
+        left: '-2vw'
+    });
     setPanel(contactRight, "assets/images/panels/3D/mountain-render.png", {
         bottom: '-6vw',
         right: '-3vw',
