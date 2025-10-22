@@ -5,55 +5,32 @@
     <title>Snoozecrow | By Madila</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600|questrial:400"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://use.typekit.net/kgz6vki.css" />
+    <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600|questrial:400" rel="stylesheet">
     <meta name="theme-color" content="black" />
   </head>
 
   <body data-tilable>
-    <div id="panels" data-perspective></div>
-    <h1>
-      SNOOZECROW STUDIO
-      <em><span class="by">X</span> <span class="madila">MADILA</span></em>
-    </h1>
-
-    <div id="feature-container">
-      <svg
-        id="canvas"
-        width="500"
-        height="500"
-        viewBox="0 0 500 500"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <defs>
-          <path
-            id="circle-text"
-            d="M 250,15 A 236,236 0 1,1 249.99,15 Z"
-            fill="none"
-            stroke="white"
-          />
-        </defs>
-        <text>
-          <textPath xlink:href="#circle-text" startOffset="0%">
-            FRONTEND DEV | BACKEND DEV | FULL STACK | MICROSITES | GRAPHIC
-            DESIGN | MUSIC | 3D | PHOTOGRAPHY | VIDEO | BESPOKE SOLUTIONS |
-            BESPOKE STACK | ART | SOCIAL MEDIA |
-          </textPath>
-        </text>
-      </svg>
+    <header>
+      <h1>
+        <strong>SNOOZECROW STUDIO</strong>
+        <em><span class="by">X</span> <span class="madila">MADILA</span></em>
+      </h1>
+      <nav>
+        <ul id="menu-list">
+          <li id="about"><a href="#about">ABOUT</a></li>
+          <li id="projects"><a href="#projects">PROJECTS</a></li>
+          <li id="packages"><a href="#packages">PACKAGES</a></li>
+          <li id="contact"><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="feature-container">
+      <p>FRONTEND DEV | BACKEND DEV | FULL STACK | MICROSITES | GRAPHIC
+        DESIGN | MUSIC | 3D | PHOTOGRAPHY | VIDEO | BESPOKE SOLUTIONS |
+        BESPOKE STACK | ART | SOCIAL MEDIA</p>
       <div id="container"></div>
-      <ul id="menu-list">
-        <li id="about">&ensp; &ensp; &ensp; ABOUT</li>
-        <li id="projects">&ensp; &ensp; &ensp; PROJECTS</li>
-        <li id="packages">&ensp; &ensp; &ensp; PACKAGES</li>
-        <li id="contact">&ensp; &ensp; &ensp; CONTACT</li>
-      </ul>
-    </div>
-
+      <div id="panels" data-perspective></div>
+    </main>
     <script type="importmap">
       {
         "imports": {

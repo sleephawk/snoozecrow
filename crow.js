@@ -19,7 +19,7 @@ function init() {
     1000
   );
   camera.position.set(2, 2, 2);
-
+  camera.zoom = 1.3;
   // ----- SCENE -----
   scene = new THREE.Scene();
   scene.background = null;
