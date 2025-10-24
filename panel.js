@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         panels.appendChild(img);
       }
 
-      event.target.blur()
+      contentBox.focus();
 
       panelsContent.forEach((item) => {
         item.setAttribute('hidden', 'true');
