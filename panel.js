@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentColor = 'white';
     let byAnimation = true;
 
+
+    
     const colors = [
         'white',
         '#03ffff',

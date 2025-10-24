@@ -94,10 +94,10 @@ textPath {
   color: white;
   font-family: var(--default-font-family);
   position: fixed;
-  right: 5%;
-  bottom: 9rem;
+  right: 4%;
+  bottom: 8rem;
   top: 15vw;
-  left: 95%;
+  left: 96%;
   background-color: rgba(0, 0, 0, 0.305);
   line-height: 1.5;
   padding: 0;
@@ -110,7 +110,7 @@ textPath {
 
 .panels-active #content-box {
   transition: all 600ms linear 1.5s;
-  padding: 2rem 15vw 2rem 2rem;
+  padding: 2rem 280px 2rem 2rem;
   left: 5%;
   border: 1px solid white;
   border-left: 4px solid white;
@@ -267,13 +267,6 @@ html:not(.braindbird-loaded) {
 }
 
 
-@media screen and (max-width: 1111px) {
-  #menu-list {
-    background-color: rgba(0, 0, 0, 0.805);
-  }
-}
-
-
 #feature-container > p {
   color: #888888;
   width: 100%;
@@ -293,6 +286,7 @@ html:not(.braindbird-loaded) {
     display: none;
   }
 }
+
 
 #content-box {
   overflow: hidden;
@@ -340,4 +334,30 @@ details {
 
 summary::marker {
 
+}
+
+
+@media screen and (max-width: 1111px) {
+  #content-box {
+    top: 17vw;
+  }
+  .panels-active #content-box {
+    padding: 2rem;
+  }
+  #menu-list {
+    right: -170px;
+    background-color: rgba(0, 0, 0, 0.805);
+    transition: 300ms linear;
+    padding: 2rem 0 2rem 1rem;
+  }
+  #menu-list:where(:hover, :active, :focus, :focus-within) {
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.905);
+  }
+  #feature-container > p {
+    font-size: 1.3ch;
+  }
+  #content-box section {
+    height: 68vh;
+  }
 }
