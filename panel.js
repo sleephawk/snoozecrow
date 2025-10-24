@@ -26,19 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
 
     const animationColours = (init = false) => {
-        if(byAnimation || init) {
-           let index;
-           index = colors.indexOf(currentColor);
+        if (byAnimation || init) {
+            let index;
+            index = colors.indexOf(currentColor);
 
-           if(colors.length === (index+1)) {
-               currentColor = colors[0];
-           } else {
-               if(index >= 0 && index < colors.length - 1) currentColor = colors[index + 1];
-           }
+            if (colors.length === (index + 1)) {
+                currentColor = colors[0];
+            } else {
+                if (index >= 0 && index < colors.length - 1) currentColor = colors[index + 1];
+            }
 
-           intro.style.setProperty('--next-color', currentColor);
+            intro.style.setProperty('--next-color', currentColor);
 
-           byAnimation = setInterval(animationColours, 4000);
+            byAnimation = setInterval(animationColours, 4000);
         }
     }
 
@@ -112,14 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const activeContent = document.querySelector(hash);
             let initTimeout = 1500;
 
-            if(!main.classList.contains('panels-active')) {
+            if (!main.classList.contains('panels-active')) {
                 initTimeout = 2500;
                 main.classList.add('panels-active');
                 window.dispatchEvent(stopRender);
             }
 
 
-            if(!document.body.classList.contains('panels-active')) {
+            if (!document.body.classList.contains('panels-active')) {
                 document.body.classList.add('panels-active');
                 setTimeout(() => {
                     document.body.classList.remove('panels-active');
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             byAnimation = null;
 
-            if(document.getElementById("feature")) {
+            if (document.getElementById("feature")) {
                 panels.removeChild(document.getElementById("feature"));
             }
 
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log(settings.image);
 
-            if(settings.image) {
+            if (settings.image) {
                 const {top, left, right, bottom, width, position} = Object.assign(defaultSettings, settings);
 
                 const img = document.createElement("img");
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             panelsContent.forEach((item) => {
-                if(item.id === activeContent.id) {
+                if (item.id === activeContent.id) {
                     setTimeout(() => {
                         item.removeAttribute('hidden');
                     }, initTimeout)
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const panelsSettings = {
         '#packages': {
-           image: "assets/images/panels/3D/lighthouse.png",
+            image: "assets/images/panels/3D/lighthouse.png",
             bottom: '-100px',
             width: '110vw'
         },

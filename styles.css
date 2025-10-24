@@ -1,5 +1,5 @@
 html {
-  --default-font-family: 'questrial', sans-serif;
+  --default-font-family: "questrial", sans-serif;
   --brand-primary: #03ffff;
   line-height: 1.5;
 }
@@ -22,7 +22,7 @@ h1 {
   position: fixed;
   margin: 0;
   transform: translate(var(--magnet-x-half), var(--magnet-y-half));
-  text-shadow: var(--shadow-x) var(--shadow-y) 0.5rem rgba(255,255,255,0.2);
+  text-shadow: var(--shadow-x) var(--shadow-y) 0.5rem rgba(255, 255, 255, 0.2);
 }
 
 p {
@@ -124,7 +124,12 @@ textPath {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0;
   line-height: 1;
 }
@@ -166,7 +171,7 @@ h2 {
   font-size: 2.2em;
   display: block;
   line-height: 1em;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 #menu-list li:where(:hover, :focus, :focus-within) {
@@ -174,7 +179,7 @@ h2 {
 }
 
 #menu-list li:where(:hover, :focus, :focus-within)::marker {
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
 }
 
 #menu-list li:where(:hover, :focus, :focus-within) a {
@@ -241,7 +246,6 @@ h1 em {
   line-height: 0.57;
 }
 
-
 .by {
   transition-duration: 1s;
   display: inline-block;
@@ -249,7 +253,7 @@ h1 em {
   transform: none;
   opacity: 1;
   transition-property: transform, color;
-  color: var(--next-color, 'white');
+  color: var(--next-color, "white");
 }
 
 .madila {
@@ -262,8 +266,6 @@ h1 em {
   font-size: 3.2vw;
 }
 
-
-
 html:not(.braindbird-loaded) {
   .by {
     opacity: 0;
@@ -274,7 +276,6 @@ html:not(.braindbird-loaded) {
     transform: translateX(4rem);
   }
 }
-
 
 #feature-container > p {
   color: #888888;
@@ -295,7 +296,6 @@ html:not(.braindbird-loaded) {
     display: none;
   }
 }
-
 
 #content-box {
   overflow: hidden;
@@ -330,7 +330,7 @@ html:not(.braindbird-loaded) {
 
 details {
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   margin-bottom: 0.7rem;
   summary {
     font-weight: 500;
@@ -342,9 +342,23 @@ details {
 }
 
 summary::marker {
-
 }
 
+.projects-content-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.screenshot,
+.soundcloud {
+  width: 45%;
+}
+
+.soundcloud {
+  max-height: 150px;
+}
 
 @media screen and (max-width: 1111px) {
   #content-box {
