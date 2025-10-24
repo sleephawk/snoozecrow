@@ -1,46 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>Snoozecrow | By Madila</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css"/>
     <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600|questrial:400" rel="stylesheet">
-    <meta name="theme-color" content="black" />
-  </head>
+    <meta name="theme-color" content="black"/>
+</head>
 
-  <body data-tilable>
-    <header>
-      <h1>
+<body data-tilable>
+<header>
+    <h1>
         <strong>SNOOZECROW STUDIO</strong>
         <em><span class="by">X</span> <span class="madila">MADILA</span></em>
-      </h1>
-      <nav>
+    </h1>
+    <nav>
         <ul id="menu-list">
-          <li id="about"><a href="#about">ABOUT</a></li>
-          <li id="projects"><a href="#projects">PROJECTS</a></li>
-          <li id="packages"><a href="#packages">PACKAGES</a></li>
-          <li id="contact"><a href="#contact">CONTACT</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#packages">PACKAGES</a></li>
+            <li><a href="#faqs">FAQs</a></li>
         </ul>
-      </nav>
-    </header>
-    <main id="feature-container">
-      <p>FRONTEND DEV | BACKEND DEV | FULL STACK | MICROSITES | GRAPHIC
+    </nav>
+</header>
+<main id="feature-container">
+    <p class="solutions">FRONTEND DEV | BACKEND DEV | FULL STACK | MICROSITES | GRAPHIC
         DESIGN | MUSIC | 3D | PHOTOGRAPHY | VIDEO | BESPOKE SOLUTIONS |
         BESPOKE STACK | ART | SOCIAL MEDIA</p>
-      <div id="container"></div>
-      <div id="panels" data-perspective></div>
-    </main>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"
-        }
+    <div id="content-box">
+        <section id="about" hidden>
+            <h2>ABOUT US</h2>
+            <p>We are Matt Wright and Ruben Madila. We collaborate on projects that require a fully bespoke approach to deliver visual experiences on the web.</p>
+        </section>
+        <section id="projects" hidden>
+            <h2>ABOUT US</h2>
+            <p>We are Matt Wright and Ruben Madila. We collaborate on projects that require a fully bespoke approach to deliver visual experiences on the web.</p>
+        </section>
+        <section id="packages" hidden>
+            <h2>Packages</h2>
+            <p>We are Matt Wright and Ruben Madila. We collaborate on projects that require a fully bespoke approach to deliver visual experiences on the web.</p>
+        </section>
+        <section id="faqs" hidden>
+            <div>
+                <h2>FAQS</h2>
+                <details open>
+                    <summary>What do we do?</summary>
+                    <p>From conceptualisation, design, development, to editing and publishing. We translate your online idea into its very best version, based on your budget.</p>
+                </details>
+                <details>
+                    <summary>What do you produce?</summary>
+                    <p>We believe a website communicates the most important things about you, and should be treated with the same dedication to detail to match. Tell us what you need your audience to know, we make sure it gets delivered in the most engaging way, with clear, meaningful and memorable messaging. To tell your business’s journey, we provide the highway and the car, i.e. the story and the world it lives in</p>
+                </details>
+                <details>
+                    <summary>What do you do differently?</summary>
+                    <p>We focus on small projects that need the fully bespoke treatment to deliver an interactive experience to their audience. We don’t use bloat or templates and we go straight to the core of the message. We then add the branding, graphics and media that will drive the point home, in your own voice.</p>
+                </details>
+                <details>
+                    <summary>Can’t I do it with an online builder?</summary>
+                    <p>What you gain in speed and convenience of a builder you lose in flexibility and clarity. It’s true that websites need to be maintainable and succinct to keep up with our social media driven world. So, we ensure we understand the core of your business so we can create stripped down, dynamic, maintainable websites that get to the point in an aesthetically exciting fashion.</p>
+                </details>
+                <details>
+                    <summary>What if we need more than something simple?</summary>
+                    <p>We’re equipped for that. Bigger experiences require lots of planning and a robust framework, so we take stock of what you want and provide a quote after an initial prototype stage, once we’ve analysed what is necessary for the minimal viable product.</p>
+                </details>
+                <details>
+                    <summary>Do you use AI graphics and media?</summary>
+                    <p>Absolutely not. With a decade of combined experience in software development, music, graphic design, and dedication to artistic development, we have the skills to give you a real, breathing website with nuance and heart. Just like an online builder, AI is an echo of every other website, useful for quick tasks, but charmless in the long term. We’re offering something spontaneous that reflects you and your team, so you stand out for who you are.</p>
+                </details>
+            </div>
+        </section>
+    </div>
+    <div id="container"></div>
+    <div id="panels" data-perspective></div>
+</main>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"
       }
-    </script>
+    }
+</script>
 
-    <script type="module" src="crow.js"></script>
-    <script type="module" src="panel.js"></script>
-  </body>
+<script type="module" src="crow.js"></script>
+<script type="module" src="panel.js"></script>
+</body>
 </html>
