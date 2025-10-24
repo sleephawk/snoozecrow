@@ -80,7 +80,7 @@ textPath {
 
 .panels-active canvas {
   max-width: 250px;
-  max-height: 140px;
+  max-height: 150px;
 }
 
 .panels-active #container {
@@ -92,6 +92,7 @@ textPath {
 }
 
 #content-box {
+  opacity: 0;
   list-style-position: inside;
   color: white;
   font-family: var(--default-font-family);
@@ -115,13 +116,11 @@ textPath {
   transition-timing-function: linear;
   transition-delay: 1.5s;
   transition-property: left, right, bottom, opacity;
-  padding: 2rem 280px 2rem 2rem;
+  padding: 0 280px 0 2rem;
   left: 5%;
   border: 1px solid white;
   border-left: 4px solid white;
-  @starting-style {
-    opacity: 0;
-  }
+  opacity: 1;
 }
 
 h1,
@@ -304,8 +303,9 @@ html:not(.braindbird-loaded) {
 
 #content-box section {
   overflow-y: auto;
-  height: 45vh;
+  height: 100%;
   padding-right: 1rem;
+  padding-top: 2rem;
 }
 
 /* width */
@@ -365,7 +365,7 @@ summary::marker {
     top: 150px;
   }
   .panels-active #content-box {
-    padding: 2rem;
+    padding: 0 2rem;
     bottom: 50px;
   }
   #menu-list {
@@ -380,9 +380,6 @@ summary::marker {
   }
   #feature-container > p {
     font-size: 1.3ch;
-  }
-  #content-box section {
-    height: 68vh;
   }
   .panels-active #container {
     top: 0;

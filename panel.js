@@ -195,7 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '#about': {
       image: "assets/images/panels/3D/cave-render.png",
       top: 0,
-      right: '-5vw'
+      right: '-10vw',
+      width: '102vw'
     },
     '#projects': {
       image: "assets/images/panels/3D/cave-left-render.png",
