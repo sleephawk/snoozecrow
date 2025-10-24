@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const panelsSettings = {
     "#packages": {
-      image: "assets/images/panels/3D/lighthouse.png",
+      image: "assets/images/panels/3D/lighthouse-better-angle.png",
       bottom: "-100px",
       width: "110vw",
     },
