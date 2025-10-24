@@ -7,173 +7,223 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 
 let camera, scene, renderer, controls, crowhead, composer;
 
+let playing = true;
+let resizeTimer = false;
+const resizeStart = new CustomEvent("resizeStart");
+const resizeEnd = new CustomEvent("resizeEnd");
+
 init();
-animate();
 
 function init() {
-  // ----- CAMERA -----
-  camera = new THREE.PerspectiveCamera(
-    70,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.set(2, 2, 2);
-  camera.zoom = 1.3;
-  // ----- SCENE -----
-  scene = new THREE.Scene();
-  scene.background = null;
+    // ----- CAMERA -----
+    camera = new THREE.PerspectiveCamera(
+        70,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
+    camera.position.set(2, 2, 2);
+    camera.zoom = 1.3;
+    // ----- SCENE -----
+    scene = new THREE.Scene();
+    scene.background = null;
 
-  // ----- LIGHTS -----
-  const directional = new THREE.DirectionalLight(0xffffff, 1);
-  directional.position.set(5, 5, 5);
-  scene.add(directional);
+    // ----- LIGHTS -----
+    const directional = new THREE.DirectionalLight(0xffffff, 1);
+    directional.position.set(5, 5, 5);
+    scene.add(directional);
 
-  const ambient = new THREE.AmbientLight(0x404040);
-  scene.add(ambient);
+    const ambient = new THREE.AmbientLight(0x404040);
+    scene.add(ambient);
 
-  // ----- RENDERER -----
-  const container = document.getElementById("container");
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  container.appendChild(renderer.domElement);
+    // ----- RENDERER -----
+    const container = document.getElementById("container");
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    container.appendChild(renderer.domElement);
 
-  // ----- CONTROLS -----
-  controls = new OrbitControls(camera, renderer.domElement);
+    // ----- CONTROLS -----
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.autoRotate = true;
+    controls.enablePan = false;
+    controls.enableZoom = false;
 
-  // ----- POSTPROCESSING COMPOSER -----
-  composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
+    // ----- POSTPROCESSING COMPOSER -----
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
 
-  const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(container.offsetWidth, container.offsetHeight),
-    1.5, // strength
-    0.4, // radius
-    0.75 // threshold
-  );
-  composer.addPass(bloomPass);
+    const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(container.offsetWidth, container.offsetHeight),
+        1.5, // strength
+        0.4, // radius
+        0.75 // threshold
+    );
+    //composer.addPass(bloomPass);
 
-  // ----- LOAD GLB -----
-  const loader = new GLTFLoader();
-  loader.load(
-    "assets/snoozeHeadWHeadphones.glb",
-    (gltf) => {
-      crowhead = gltf.scene;
+    // ----- LOAD GLB -----
+    const loader = new GLTFLoader();
+    loader.load(
+        "assets/snoozeHeadWHeadphones.glb",
+        (gltf) => {
+            crowhead = gltf.scene;
 
-      crowhead.traverse((child) => {
-        if (child.isMesh && !child.userData.isOutline) {
-          const matName = child.material.name;
+            crowhead.traverse((child) => {
+                if (child.isMesh && !child.userData.isOutline) {
+                    const matName = child.material.name;
 
-          // Assign toon/standard materials
-          switch (matName) {
-            case "grey":
-              child.material = new THREE.MeshToonMaterial({ color: 0x525252 });
-              break;
-            case "black":
-              child.material = new THREE.MeshToonMaterial({ color: 0x000000 });
-              break;
-            case "white":
-              child.material = new THREE.MeshToonMaterial({ color: 0x000000 });
-              break;
-            case "emission":
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0x000000,
-                emissive: 0xffffff,
-                emissiveIntensity: 1,
-              });
-              break;
-            default:
-              child.material = new THREE.MeshToonMaterial({ color: 0xffffff });
-          }
+                    // Assign toon/standard materials
+                    switch (matName) {
+                        case "grey":
+                            child.material = new THREE.MeshToonMaterial({ color: 0x525252 });
+                            break;
+                        case "black":
+                            child.material = new THREE.MeshToonMaterial({ color: 0x000000 });
+                            break;
+                        case "white":
+                            child.material = new THREE.MeshToonMaterial({ color: 0x000000 });
+                            break;
+                        case "emission":
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0x000000,
+                                emissive: 0xffffff,
+                                emissiveIntensity: 1,
+                            });
+                            break;
+                        default:
+                            child.material = new THREE.MeshToonMaterial({ color: 0xffffff });
+                    }
 
-          // Add cartoon-style outline
-          const outlineMat = new THREE.MeshBasicMaterial({
-            color: 0x00ffff, // outline color
-            side: THREE.BackSide,
-          });
+                    // Add cartoon-style outline
+                    const outlineMat = new THREE.MeshBasicMaterial({
+                        color: 0x00ffff, // outline color
+                        side: THREE.BackSide,
+                    });
 
-          const outlineMesh = new THREE.Mesh(child.geometry, outlineMat);
-          outlineMesh.scale.multiplyScalar(1.02); // slightly bigger
-          outlineMesh.userData.isOutline = true; // mark as outline to avoid recursion
-          child.add(outlineMesh);
-        }
-      });
+                    const outlineMesh = new THREE.Mesh(child.geometry, outlineMat);
+                    outlineMesh.scale.multiplyScalar(1.02); // slightly bigger
+                    outlineMesh.userData.isOutline = true; // mark as outline to avoid recursion
+                    child.add(outlineMesh);
+                }
+            });
 
-      scene.add(crowhead);
-    },
-    undefined,
-    (error) => console.error("Error loading GLB:", error)
-  );
+            scene.add(crowhead);
+        },
+        undefined,
+        (error) => console.error("Error loading GLB:", error)
+    );
 
-  // ----- PARTICLE WHISPS -----
+    // ----- PARTICLE WHISPS -----
 
-  const whispCount = 50;
-  const whispGeometry = new THREE.BufferGeometry();
-  const whispPositions = [];
+    const whispCount = 50;
+    const whispGeometry = new THREE.BufferGeometry();
+    const whispPositions = [];
 
-  for (let i = 0; i < whispCount; i++) {
-    const radius = Math.random() * 2 + 0.5; // distance from center
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.random() * Math.PI;
+    for (let i = 0; i < whispCount; i++) {
+        const radius = Math.random() * 2 + 0.5; // distance from center
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
 
-    const x = radius * Math.sin(phi) * Math.cos(theta);
-    const y = radius * Math.cos(phi);
-    const z = radius * Math.sin(phi) * Math.sin(theta);
+        const x = radius * Math.sin(phi) * Math.cos(theta);
+        const y = radius * Math.cos(phi);
+        const z = radius * Math.sin(phi) * Math.sin(theta);
 
-    whispPositions.push(x, y, z);
-  }
+        whispPositions.push(x, y, z);
+    }
 
-  whispGeometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(whispPositions, 3)
-  );
+    whispGeometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(whispPositions, 3)
+    );
 
-  const whispMaterial = new THREE.PointsMaterial({
-    color: 0xffffff, // bright white
-    size: 0.05, // particle size
-    sizeAttenuation: true,
-  });
+    const whispMaterial = new THREE.PointsMaterial({
+        color: 0xffffff, // bright white
+        size: 0.05, // particle size
+        sizeAttenuation: true,
+    });
 
-  const whisps = new THREE.Points(whispGeometry, whispMaterial);
-  scene.add(whisps);
+    const whisps = new THREE.Points(whispGeometry, whispMaterial);
+    scene.add(whisps);
 
-  // store for animation
-  scene.userData.whisps = whisps;
+    // store for animation
+    scene.userData.whisps = whisps;
 
-  // ----- INITIAL RESIZE -----
-  onWindowResize();
+    // ----- INITIAL RESIZE -----
+    onWindowResize();
+
+    animate();
 }
 
 // ----- HANDLE RESIZE -----
 window.addEventListener("resize", onWindowResize);
 
 function onWindowResize() {
-  const container = document.getElementById("container");
-  const w = container.offsetWidth;
-  const h = container.offsetHeight;
+    if(!playing) {
+        if (!resizeTimer) {
+            window.dispatchEvent(resizeStart);
+        }
 
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(w, h);
-  composer.setSize(w, h);
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  if (crowhead) crowhead.rotation.y += 0.002; // slow spin
-
-  // Animate whisps
-
-  if (scene.userData.whisps) {
-    const positions = scene.userData.whisps.geometry.attributes.position.array;
-    for (let i = 0; i < positions.length; i += 3) {
-      positions[i + 1] += 0.002; // move upward
-      if (positions[i + 1] > 2.5) positions[i + 1] = -2; // reset when too high
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            resizeTimer = false;
+            window.dispatchEvent(resizeEnd);
+        }, 250);
     }
-    scene.userData.whisps.geometry.attributes.position.needsUpdate = true;
-  }
 
-  controls.update();
-  composer.render(); // render via composer with bloom
+    const container = document.getElementById("container");
+    const w = container.offsetWidth;
+    const h = container.offsetHeight;
+
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(w, h);
+    composer.setSize(w, h);
 }
+
+function animate(frame, once = false) {
+    if(!playing) return false;
+
+    //if (crowhead) crowhead.rotation.y += 0.002; // slow spin
+
+    // Animate whisps
+
+    if (scene.userData.whisps) {
+        const positions = scene.userData.whisps.geometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i += 3) {
+            positions[i + 1] += 0.002; // move upward
+            if (positions[i + 1] > 2.5) positions[i + 1] = -2; // reset when too high
+        }
+        scene.userData.whisps.geometry.attributes.position.needsUpdate = true;
+    }
+
+    controls.update();
+    composer.render(); // render via composer with bloom
+
+    if(!once) requestAnimationFrame(animate);
+}
+
+
+window.addEventListener('stopRender', () => {
+    console.log('stopping');
+    playing = false;
+    console.log(controls);
+    console.log(camera);
+    window.dispatchEvent(new Event('resize'));
+});
+
+window.addEventListener('startRender', () => {
+    animate(null, false);
+});
+
+window.addEventListener('resizeEnd', () => {
+    console.log('resize end');
+    //playing = false;
+    document.body.classList.remove('resizing');
+    controls.autoRotate = false;
+});
+
+window.addEventListener('resizeStart', () => {
+    console.log('resize start');
+    document.body.classList.add('resizing');
+    playing = true;
+    animate(null, false);
+});
