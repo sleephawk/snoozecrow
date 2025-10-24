@@ -1,6 +1,7 @@
 html {
   --default-font-family: 'questrial', sans-serif;
   --brand-primary: #03ffff;
+  line-height: 1.5;
 }
 
 html * {
@@ -24,6 +25,9 @@ h1 {
   text-shadow: var(--shadow-x) var(--shadow-y) 0.5rem rgba(255,255,255,0.2);
 }
 
+p {
+  margin-top: 0.4rem;
+}
 body.panels-active h1 {
   transition: transform 500ms linear;
 }
@@ -84,6 +88,44 @@ textPath {
   animation: rotate 100s linear infinite;
 }
 
+
+#content-box {
+  list-style-position: inside;
+  color: white;
+  font-family: var(--default-font-family);
+  position: fixed;
+  right: 4%;
+  bottom: 8rem;
+  top: 15vw;
+  left: 96%;
+  background-color: rgba(0, 0, 0, 0.305);
+  line-height: 1.5;
+  padding: 0;
+  border: 0 solid white;
+  corner-shape: bevel;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 16px;
+  z-index: 800;
+}
+
+.panels-active #content-box {
+  transition: all 600ms linear 1.5s;
+  padding: 2rem 280px 2rem 2rem;
+  left: 5%;
+  border: 1px solid white;
+  border-left: 4px solid white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
 #menu-list {
   list-style-position: inside;
   color: white;
@@ -100,6 +142,7 @@ textPath {
   corner-shape: bevel;
   border-bottom-right-radius: 16px;
   border-top-left-radius: 16px;
+  z-index: 10001;
 }
 #menu-list li a {
   color: white;
@@ -225,13 +268,6 @@ html:not(.braindbird-loaded) {
 }
 
 
-@media screen and (max-width: 1111px) {
-  #menu-list {
-    background-color: rgba(0, 0, 0, 0.805);
-  }
-}
-
-
 #feature-container > p {
   color: #888888;
   width: 100%;
@@ -247,7 +283,82 @@ html:not(.braindbird-loaded) {
 #feature-container.panels-active {
   justify-content: unset;
   align-items: unset;
-  p {
+  p.solutions {
     display: none;
+  }
+}
+
+
+#content-box {
+  overflow: hidden;
+  letter-spacing: 0.02em;
+}
+
+#content-box section {
+  overflow-y: auto;
+  height: 45vh;
+  padding-right: 1rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f199;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+details {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  margin-bottom: 0.7rem;
+  summary {
+    font-weight: 500;
+    font-size: 1.3em;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+summary::marker {
+
+}
+
+
+@media screen and (max-width: 1111px) {
+  #content-box {
+    top: 17vw;
+  }
+  .panels-active #content-box {
+    padding: 2rem;
+  }
+  #menu-list {
+    right: -170px;
+    background-color: rgba(0, 0, 0, 0.805);
+    transition: 300ms linear;
+    padding: 2rem 0 2rem 1rem;
+  }
+  #menu-list:where(:hover, :active, :focus, :focus-within) {
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.905);
+  }
+  #feature-container > p {
+    font-size: 1.3ch;
+  }
+  #content-box section {
+    height: 68vh;
   }
 }

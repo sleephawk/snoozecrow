@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const packagesBottom = document.getElementById("packages");
-    const aboutTop = document.getElementById("about");
-    const projectsLeft = document.getElementById("projects");
-    const contactRight = document.getElementById("contact");
+
+    const menuLinks = document.querySelectorAll('#menu-list a');
+    const contentBox = document.getElementById('content-box');
+    const panelsContent = contentBox && contentBox.querySelectorAll('section');
 
     const crow = document.getElementById("container");
     const canvas = document.querySelector("canvas");
@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentColor = 'white';
     let byAnimation = true;
 
+
+
     const colors = [
         'white',
         '#03ffff',
@@ -22,8 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         '#62c6c6',
         '#709393'
     ]
-
-    console.log(byAnimation);
 
     const animationColours = (init = false) => {
         if(byAnimation || init) {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
            }
 
            intro.style.setProperty('--next-color', currentColor);
-           console.log(colors.length, currentColor, init);
+
            byAnimation = setInterval(animationColours, 4000);
         }
     }
@@ -95,23 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const throttledMouseOver = throttle(mouseOver, 9);
 
-    const setPanel = (el, url, settings = {}) => {
+    const setPanel = (el, settings = {}, hash) => {
 
         let defaultSettings = {
+            image: null,
             bottom: 'auto',
             left: 'auto',
             top: 'auto',
             right: 'auto',
             position: 'fixed',
             width: '100vw'
-        }
+        };
 
         el.addEventListener("click", (event) => {
 
+            const activeContent = document.querySelector(hash);
+            let initTimeout = 1500;
+
             if(!main.classList.contains('panels-active')) {
+                initTimeout = 2500;
                 main.classList.add('panels-active');
                 crow.remove();
             }
+
 
             if(!document.body.classList.contains('panels-active')) {
                 document.body.classList.add('panels-active');
@@ -131,26 +137,43 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!panels.dataset.perspective) {
                 window.addEventListener('mousemove', throttledMouseOver);
                 panels.dataset.perspective = 'active';
+
             }
 
-            const {top, left, right, bottom, width, position} = Object.assign(defaultSettings, settings);
+            console.log(settings.image);
 
-            const img = document.createElement("img");
-            img.addEventListener('load', () => {
-                img.classList.add('active');
+            if(settings.image) {
+                const {top, left, right, bottom, width, position} = Object.assign(defaultSettings, settings);
+
+                const img = document.createElement("img");
+                img.addEventListener('load', () => {
+                    img.classList.add('active');
+                });
+                img.setAttribute("id", "feature");
+                img.setAttribute("src", settings.image);
+                img.setAttribute("draggable", "false");
+                img.style.bottom = bottom;
+                img.style.right = right;
+                img.style.top = top;
+                img.style.left = left;
+                img.style.width = width;
+                img.style.position = position;
+                crow.style.opacity = '0';
+                canvas.style.opacity = '0';
+                panels.appendChild(img);
+            }
+
+
+            panelsContent.forEach((item) => {
+                if(item.id === activeContent.id) {
+                    setTimeout(() => {
+                        item.removeAttribute('hidden');
+                    }, initTimeout)
+                } else {
+                    item.setAttribute('hidden', true);
+                }
             });
-            img.setAttribute("id", "feature");
-            img.setAttribute("src", url);
-            img.setAttribute("draggable", "false");
-            img.style.bottom = bottom;
-            img.style.right = right;
-            img.style.top = top;
-            img.style.left = left;
-            img.style.width = width;
-            img.style.position = position;
-            crow.style.opacity = '0';
-            canvas.style.opacity = '0';
-            panels.appendChild(img);
+
             console.log("we got there");
         });
     };
@@ -164,24 +187,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    document.documentElement.classList.add('braindbird-loaded')
-    setPanel(packagesBottom, "assets/images/panels/3D/lighthouse.png", {
-        bottom: '-100px',
-        width: '110vw'
-    });
-    setPanel(aboutTop, "assets/images/panels/3D/cave-render.png", {
-        bottom: 0,
-        left: '-5vw'
-    });
-    setPanel(projectsLeft, "assets/images/panels/3D/cave-left-render.png", {
-        bottom: 0,
-        left: '-2vw'
-    });
-    setPanel(contactRight, "assets/images/panels/3D/mountain-render.png", {
-        bottom: '-6vw',
-        right: '-3vw',
-        width: '110vw'
-    });
+    document.documentElement.classList.add('braindbird-loaded');
+
+
+    const panelsSettings = {
+        '#packages': {
+           image: "assets/images/panels/3D/lighthouse.png",
+            bottom: '-100px',
+            width: '110vw'
+        },
+        '#about': {
+            image: "assets/images/panels/3D/cave-render.png",
+            bottom: 0,
+            left: '-5vw'
+        },
+        '#projects': {
+            image: "assets/images/panels/3D/cave-left-render.png",
+            bottom: 0,
+            left: '-2vw'
+        },
+        '#faqs': {
+            image: "assets/images/panels/3D/mountain-render.png",
+            bottom: '-6vw',
+            right: '-3vw',
+            width: '110vw'
+        }
+    }
+
+    menuLinks.forEach((ele) => {
+
+        let panelHash = ele.href.substring(ele.href.indexOf("#"));
+        const panelSetting = panelsSettings[panelHash];
+        setPanel(ele, panelSetting, panelHash);
+    })
 
     animationColours(true);
 });
