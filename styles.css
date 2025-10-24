@@ -6,6 +6,7 @@ html {
 
 html * {
   box-sizing: border-box;
+  font-family: var(--default-font-family, sans-serif);
 }
 
 h1 {
@@ -173,15 +174,15 @@ h2 {
   color: rgba(255, 255, 255, 0.4);
 }
 
-#menu-list li:where(:hover, :focus, :focus-within) {
+#menu-list li:where(:hover, :focus, :focus-within):has(.active)::marker {
   transition: all 0.1s ease-in;
 }
 
-#menu-list li:where(:hover, :focus, :focus-within)::marker {
+#menu-list li:where(:hover, :focus, :focus-within)::marker,  #menu-list li:has(.active)::marker {
   color: rgba(255, 255, 255, 1);
 }
 
-#menu-list li:where(:hover, :focus, :focus-within) a {
+#menu-list li:where(:hover, :focus, :focus-within) a, #menu-list li a.active {
   outline: none;
   cursor: pointer;
   scale: 1.2;
@@ -366,7 +367,7 @@ summary::marker {
   }
   .panels-active #content-box {
     padding: 0 2rem;
-    bottom: 50px;
+    bottom: 100px;
   }
   #menu-list {
     right: -170px;
@@ -384,5 +385,40 @@ summary::marker {
   .panels-active #container {
     top: 0;
     left: -2rem;
+  }
+}
+
+
+.content-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  footer {
+    width: 100%;
+    display: none;
+  }
+}
+
+.panels-active footer {
+  display: flex;
+  justify-content: space-between;
+  z-index: 800;
+  padding: 1rem;
+}
+
+footer a {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .5rem 1rem;
+  border: 1px solid white;
+  transition: all 300ms linear;
+  corner-shape: bevel;
+  border-bottom-right-radius: 7px;
+  border-top-left-radius: 7px;
+  &:where(:hover, :active, :focus) {
+    text-decoration: underline;
+    border-left-width: 4px;
   }
 }

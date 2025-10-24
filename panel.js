@@ -108,7 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     el.addEventListener("click", (event) => {
-      el.blur();
+
+      menuLinks.forEach((menuLink) => {
+        menuLink.classList.remove('active');
+      })
+
+      el.classList.add('active');
+
+
       const activeContent = document.querySelector(hash);
       let initTimeout = 1500;
 
@@ -161,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         panels.appendChild(img);
       }
 
+      event.target.blur()
 
       panelsContent.forEach((item) => {
         item.setAttribute('hidden', 'true');
@@ -190,6 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '#packages': {
       image: "assets/images/panels/3D/lighthouse-better-angle.png",
       bottom: '-100px',
+      left: '-5vw',
+      right: '-5vw',
       width: '110vw'
     },
     '#about': {
