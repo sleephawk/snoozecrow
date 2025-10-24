@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     el.addEventListener("click", (event) => {
-
+      el.blur();
       const activeContent = document.querySelector(hash);
       let initTimeout = 1500;
 
