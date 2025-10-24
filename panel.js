@@ -168,8 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
         panels.appendChild(img);
       }
 
-      contentBox.focus();
-
       panelsContent.forEach((item) => {
         item.setAttribute('hidden', 'true');
       });
@@ -179,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, initTimeout);
 
       console.log("we got there");
+      contentBox.click();
     });
   };
 

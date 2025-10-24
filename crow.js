@@ -45,7 +45,7 @@ function init() {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
     controls.enablePan = false;
-    controls.enableZoom = false;
+    controls.enableZoom = true;
 
     // ----- POSTPROCESSING COMPOSER -----
     composer = new EffectComposer(renderer);
