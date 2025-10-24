@@ -7,8 +7,12 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 
 let camera, scene, renderer, controls, crowhead, composer;
 
+let playing = true;
+let resizeTimer = false;
+const resizeStart = new CustomEvent("resizeStart");
+const resizeEnd = new CustomEvent("resizeEnd");
+
 init();
-animate();
 
 function init() {
   // ----- CAMERA -----
@@ -39,6 +43,9 @@ function init() {
 
   // ----- CONTROLS -----
   controls = new OrbitControls(camera, renderer.domElement);
+  controls.autoRotate = true;
+  controls.enablePan = false;
+  controls.enableZoom = false;
 
   // ----- POSTPROCESSING COMPOSER -----
   composer = new EffectComposer(renderer);
@@ -50,7 +57,7 @@ function init() {
     0.4, // radius
     0.75 // threshold
   );
-  composer.addPass(bloomPass);
+  //composer.addPass(bloomPass);
 
   // ----- LOAD GLB -----
   const loader = new GLTFLoader();
@@ -141,12 +148,26 @@ function init() {
 
   // ----- INITIAL RESIZE -----
   onWindowResize();
+
+  animate();
 }
 
 // ----- HANDLE RESIZE -----
 window.addEventListener("resize", onWindowResize);
 
 function onWindowResize() {
+  if(!playing) {
+    if (!resizeTimer) {
+      window.dispatchEvent(resizeStart);
+    }
+
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      resizeTimer = false;
+      window.dispatchEvent(resizeEnd);
+    }, 250);
+  }
+
   const container = document.getElementById("container");
   const w = container.offsetWidth;
   const h = container.offsetHeight;
@@ -158,10 +179,10 @@ function onWindowResize() {
   composer.setSize(w, h);
 }
 
-function animate() {
-  requestAnimationFrame(animate);
+function animate(frame, once = false) {
+  if(!playing) return false;
 
-  if (crowhead) crowhead.rotation.y += 0.002; // slow spin
+  //if (crowhead) crowhead.rotation.y += 0.002; // slow spin
 
   // Animate whisps
 
@@ -176,4 +197,33 @@ function animate() {
 
   controls.update();
   composer.render(); // render via composer with bloom
+
+  if(!once) requestAnimationFrame(animate);
 }
+
+
+window.addEventListener('stopRender', () => {
+  console.log('stopping');
+  playing = false;
+  console.log(controls);
+  console.log(camera);
+  window.dispatchEvent(new Event('resize'));
+});
+
+window.addEventListener('startRender', () => {
+  animate(null, false);
+});
+
+window.addEventListener('resizeEnd', () => {
+  console.log('resize end');
+  //playing = false;
+  document.body.classList.remove('resizing');
+  controls.autoRotate = false;
+});
+
+window.addEventListener('resizeStart', () => {
+  console.log('resize start');
+  document.body.classList.add('resizing');
+  playing = true;
+  animate(null, false);
+});

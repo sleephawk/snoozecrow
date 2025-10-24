@@ -58,6 +58,7 @@ body.panels-active h1 {
   background: black;
   padding: 4vw 7vw;
   position: relative;
+  background: radial-gradient(#232323, #000000);
 }
 #wrapper {
   border: 2px solid red;
@@ -77,17 +78,18 @@ textPath {
   font-size: 15.9px;
 }
 
-#canvas {
-  position: relative;
-  z-index: 100;
-  pointer-events: none;
-  align-self: end;
-  justify-self: center;
-  max-width: 100vw;
-  max-height: 100vh;
-  animation: rotate 100s linear infinite;
+.panels-active canvas {
+  max-width: 250px;
+  max-height: 140px;
 }
 
+.panels-active #container {
+  z-index: 9999;
+  width: 250px;
+  height: 150px;
+  top: 2rem;
+  left: 2rem;
+}
 
 #content-box {
   list-style-position: inside;
@@ -109,11 +111,17 @@ textPath {
 }
 
 .panels-active #content-box {
-  transition: all 600ms linear 1.5s;
+  transition-duration: 600ms;
+  transition-timing-function: linear;
+  transition-delay: 1.5s;
+  transition-property: left, right, bottom, opacity;
   padding: 2rem 280px 2rem 2rem;
   left: 5%;
   border: 1px solid white;
   border-left: 4px solid white;
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -340,7 +348,7 @@ summary::marker {
 
 @media screen and (max-width: 1111px) {
   #content-box {
-    top: 17vw;
+    top: 150px;
   }
   .panels-active #content-box {
     padding: 2rem;
@@ -360,5 +368,9 @@ summary::marker {
   }
   #content-box section {
     height: 68vh;
+  }
+  .panels-active #container {
+    top: 0rem;
+    left: -2rem;
   }
 }

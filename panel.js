@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const intro = document.querySelector('header h1 span.by');
     let currentColor = 'white';
     let byAnimation = true;
-
+    const stopRender = new CustomEvent("stopRender");
 
 
     const colors = [
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         body.style.setProperty('--magnet-x', `${(x * -100)}px`);
         body.style.setProperty('--magnet-y', `${(y * -100)}px`);
-        body.style.setProperty('--magnet-x-half', `${(x * 20)}px`);
-        body.style.setProperty('--magnet-y-half', `${(y * 20)}px`);
+        body.style.setProperty('--magnet-x-half', `${(x * 3)}px`);
+        body.style.setProperty('--magnet-y-half', `${(y * 3)}px`);
         body.style.setProperty('--shadow-x', `${(x * -20)}px`);
         body.style.setProperty('--shadow-y', `${(y * -20)}px`);
         body.style.setProperty('--tilt-z', `${(parseFloat(tiltX) + parseFloat(tiltY)) * 0.2}deg`);
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(!main.classList.contains('panels-active')) {
                 initTimeout = 2500;
                 main.classList.add('panels-active');
-                crow.remove();
+                window.dispatchEvent(stopRender);
             }
 
 
@@ -158,8 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.style.left = left;
                 img.style.width = width;
                 img.style.position = position;
-                crow.style.opacity = '0';
-                canvas.style.opacity = '0';
                 panels.appendChild(img);
             }
 
@@ -198,17 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         '#about': {
             image: "assets/images/panels/3D/cave-render.png",
-            bottom: 0,
-            left: '-5vw'
+            top: 0,
+            right: '-5vw'
         },
         '#projects': {
             image: "assets/images/panels/3D/cave-left-render.png",
-            bottom: 0,
+            bottom: '-9vh',
             left: '-2vw'
         },
         '#faqs': {
             image: "assets/images/panels/3D/mountain-render.png",
-            bottom: '-6vw',
+            bottom: '-10vh',
             right: '-3vw',
             width: '110vw'
         }
