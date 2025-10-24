@@ -99,7 +99,7 @@ textPath {
   font-family: var(--default-font-family);
   position: fixed;
   right: 4%;
-  bottom: 8rem;
+  bottom: 10rem;
   top: 15vw;
   left: 96%;
   background-color: rgba(0, 0, 0, 0.305);
@@ -394,6 +394,7 @@ summary::marker {
   display: flex;
   align-items: end;
   justify-content: flex-end;
+  height: 100%;
   footer {
     width: 100%;
     display: none;
