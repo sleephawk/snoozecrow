@@ -366,6 +366,7 @@ summary::marker {
   }
   .panels-active #content-box {
     padding: 2rem;
+    bottom: 50px;
   }
   #menu-list {
     right: -170px;
@@ -384,7 +385,7 @@ summary::marker {
     height: 68vh;
   }
   .panels-active #container {
-    top: 0rem;
+    top: 0;
     left: -2rem;
   }
 }
