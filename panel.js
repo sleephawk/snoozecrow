@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     el.addEventListener("click", (event) => {
-
+      event.preventDefault();
       menuLinks.forEach((menuLink) => {
         menuLink.classList.remove('active');
       })
