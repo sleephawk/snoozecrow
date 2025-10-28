@@ -16,6 +16,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let byAnimation = true;
   const stopRender = new CustomEvent("stopRender");
 
+  const dataSources = document.querySelectorAll('[data-src]');
+  const intersectionCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let elem = entry.target;
+        console.log(elem);
+        elem.src = elem.dataset.src;
+      }
+    });
+  };
+
+  if(dataSources.length) {
+    function createObserver() {
+      const options = {
+        root: null,
+        rootMargin: "0px",
+      };
+
+      return new IntersectionObserver(intersectionCallback, options);
+    }
+    const observer = createObserver();
+
+    dataSources.forEach((dataSource) => {
+      dataSource.classList.add('observed');
+      observer.observe(dataSource);
+    });
+  }
+
   const sliderNav = document.querySelectorAll('.slider__nav a');
 
   if(sliderNav.length) {
@@ -237,11 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   menuLinks.forEach((ele) => {
-
     let panelHash = ele.href.substring(ele.href.indexOf("#"));
     const panelSetting = panelsSettings[panelHash];
     setPanel(ele, panelSetting, panelHash);
-  })
+  });
 
   animationColours(true);
 
