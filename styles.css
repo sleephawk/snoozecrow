@@ -15,7 +15,7 @@ h1 {
   font-style: normal;
   color: white;
   right: 0;
-  padding: 5vw 6vw;
+  padding: 4vh 6vw;
   line-height: 1;
   text-align: right;
   z-index: 101;
@@ -27,6 +27,7 @@ h1 {
   text-shadow: var(--shadow-x) var(--shadow-y) 0.5rem rgba(255, 255, 255, 0.2);
 }
 
+
 html h3 {
   font-family: var(--alt-font-family);
 }
@@ -34,7 +35,7 @@ html h3 {
 p {
   margin-top: 0.4rem;
 }
-body.panels-active h1 {
+body.panels-activating h1 {
   transition: transform 500ms linear;
 }
 
@@ -51,7 +52,7 @@ body.panels-active h1 {
 
 #feature {
   transition: transform 10ms linear, opacity 50ms linear;
-  scale: 1.05;
+  scale: 1.35;
   opacity: 0;
 }
 #feature-container {
@@ -62,7 +63,7 @@ body.panels-active h1 {
   margin: 0;
   overflow: hidden;
   background: black;
-  padding: 4vw 7vw;
+  padding: 1vw 7vw;
   position: relative;
   background: radial-gradient(#232323, #000000);
 }
@@ -93,7 +94,7 @@ textPath {
   z-index: 9999;
   width: 250px;
   height: 150px;
-  top: 2rem;
+  top: .5rem;
   left: 2rem;
 }
 
@@ -104,8 +105,8 @@ textPath {
   font-family: var(--default-font-family);
   position: fixed;
   right: 4%;
-  bottom: 10rem;
-  top: 15vw;
+  bottom: 6rem;
+  top: 8.5vw;
   left: 96%;
   background-color: rgba(0, 0, 0, 0.305);
   line-height: 1.5;
@@ -294,7 +295,7 @@ html:not(.braindbird-loaded) {
   font-size: 2.3ch;
 }
 
-#feature-container.panels-active {
+.panels-active #feature-container {
   justify-content: unset;
   align-items: unset;
   p.solutions {
@@ -355,6 +356,7 @@ summary::marker {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+
 }
 
 .screenshot,
@@ -454,37 +456,57 @@ footer a {
 }
 
 .media-slider, .project-slider {
-  display: grid;
-  overflow-x: scroll;
+  overflow-x: hidden;
   margin-bottom: 1rem;
 }
 
 .slider__nav {
   display: flex;
   margin-bottom: 0.5rem;
+  gap: 0.6rem;
   > a {
-    width: 100px;
     overflow: hidden;
-    height: 20px;
     border: 1px solid white;
-    background-color: white;
+    background-color: rgba(255,255,255,0.5);
     color: black;
-    padding: .4em;
+    padding: .4em .7rem;
     font-size: 0.9rem;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    text-indent: -999px;
+    aspect-ratio: 1/1;
+    border-radius: 5rem;
+  }
+  > a:where(:hover, :active, :focus), > a.active {
+    background-color: rgba(255,255,255,1);
   }
 }
 
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .media-slider__track, .project-slider__track {
-  grid-template-columns: repeat(var(--slider-children), 1fr);
-  width: calc(100% * var(--slider-children));
-  display: grid;
-  margin-bottom: 1rem;
+  overflow-y: hidden;
+  overflow-x: scroll;
   gap: 1rem;
-  scroll-snap-type: both mandatory;
+  scroll-snap-type: x mandatory;
+  display: flex;
 }
 
 .media-slide, .project-content-container {
   scroll-snap-align: start;
+  display: flex;
+  min-width: 100%;
+  margin-bottom: 0.6rem;
+}
+
+.project-content-container {
+  flex-direction: column;
+  align-items: start;
 }
 
 .media-slide > img, .media-slide > iframe {
@@ -509,13 +531,11 @@ footer a {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode,
-  Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
   font-weight: 100;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 
@@ -542,9 +562,17 @@ footer a {
 
 @media screen and (min-width: 1111px) {
   .project-slider__track {
-    grid-template-columns: repeat(var(--slider-children), .5fr);
-    width: calc(50% * var(--slider-children));
+    width: 100%;
     gap: 1rem;
-    display: grid;
+    display: flex;
+  }
+  .panels-active h1 {
+    font-size: 2vw;
+    .madila {
+      font-size: 1.5vw;
+    }
+  }
+  .project-content-container {
+    min-width:  calc(50% - 1rem);
   }
 }

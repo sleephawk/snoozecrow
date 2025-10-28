@@ -16,6 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let byAnimation = true;
   const stopRender = new CustomEvent("stopRender");
 
+  const sliderNav = document.querySelectorAll('.slider__nav a');
+
+  if(sliderNav.length) {
+    sliderNav.forEach((sliderNavItem) => {
+      sliderNavItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        const {href} = e.target;
+        if(href) {
+          let linkHash = href.substring(href.indexOf("#"));
+          const targetScroll = document.querySelector(linkHash);
+          targetScroll && targetScroll.scrollIntoView({behavior: "smooth", container: "nearest", block: "nearest", inline: "nearest"});
+        }
+      });
+    });
+  }
 
   const colors = [
     'white',
@@ -117,19 +132,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       const activeContent = document.querySelector(hash);
+      const {documentElement} = document;
       let initTimeout = 1500;
 
-      if (!main.classList.contains('panels-active')) {
+      if (!documentElement.classList.contains('panels-active')) {
         initTimeout = 2500;
-        main.classList.add('panels-active');
+        documentElement.classList.add('panels-active');
         window.dispatchEvent(stopRender);
       }
 
 
-      if (!document.body.classList.contains('panels-active')) {
-        document.body.classList.add('panels-active');
+      if (!document.body.classList.contains('panels-activating')) {
+        document.body.classList.add('panels-activating');
         setTimeout(() => {
-          document.body.classList.remove('panels-active');
+          document.body.classList.remove('panels-activating');
         }, 500);
       }
 
@@ -209,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     '#projects': {
       image: "assets/images/panels/3D/cave-left-render.png",
-      bottom: '-9vh',
+      bottom: '-6vh',
       left: '-2vw'
     },
     '#faqs': {
@@ -228,4 +244,5 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   animationColours(true);
+
 });
