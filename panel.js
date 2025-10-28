@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           let elem = entry.target;
-          console.log(elem);
+
           elem.src = elem.dataset.src;
           observer.unobserve(elem);
         }
@@ -191,8 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }
 
-      console.log(settings.image);
-
       if (settings.image) {
         const {top, left, right, bottom, width, position} = Object.assign(defaultSettings, settings);
 
@@ -220,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
         activeContent.removeAttribute('hidden');
       }, initTimeout);
 
-      console.log("we got there");
       contentBox.click();
     });
   };
