@@ -406,12 +406,12 @@ summary::marker {
   }
 }
 
-.panels-active footer {
-  display: flex;
+.panels-active .content-wrapper footer {
+  display: flex !important;
   justify-content: space-between;
   z-index: 800;
   padding: 1rem;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
