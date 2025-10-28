@@ -476,7 +476,9 @@ footer a {
     text-transform: uppercase;
     text-indent: -999px;
     aspect-ratio: 1/1;
-    border-radius: 5rem;
+    corner-shape: bevel;
+    border-top-left-radius: .6rem;
+    border-bottom-right-radius: .3rem;
   }
   > a:where(:hover, :active, :focus), > a.active {
     background-color: rgba(255,255,255,1);
@@ -487,6 +489,7 @@ footer a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .media-slider__track, .project-slider__track {
