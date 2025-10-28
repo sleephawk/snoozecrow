@@ -19,6 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const dataSources = document.querySelectorAll('[data-src]');
 
   if(dataSources.length) {
+    let observer = null;
+    const intersectionCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          let elem = entry.target;
+
+          elem.src = elem.dataset.src;
+          if(observer) observer.unobserve(elem);
+        }
+      });
+    };
     function createObserver() {
       const options = {
         root: null,
@@ -27,17 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return new IntersectionObserver(intersectionCallback, options);
     }
-    const observer = createObserver();
-    const intersectionCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          let elem = entry.target;
-
-          elem.src = elem.dataset.src;
-          observer.unobserve(elem);
-        }
-      });
-    };
+    observer = createObserver();
     dataSources.forEach((dataSource) => {
       dataSource.classList.add('observed');
       observer.observe(dataSource);
