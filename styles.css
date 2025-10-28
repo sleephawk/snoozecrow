@@ -400,13 +400,15 @@ summary::marker {
   justify-content: flex-end;
   height: 100%;
   position: relative;
-  footer {
-    width: 100%;
-    display: none;
-  }
 }
 
-.panels-active .content-wrapper footer {
+
+#feature-container footer {
+  width: 100%;
+  display: none;
+}
+
+.panels-active #feature-container footer {
   display: flex !important;
   justify-content: space-between;
   z-index: 800;
